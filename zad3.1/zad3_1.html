@@ -6,6 +6,75 @@
     <title>Katalog Filmów</title>
 </head>
 <body>
+    <div id = 'root'></div>
+
+    <script>
+        const FILMS = [
+            { id: 1, title: 'Oppenheimer',       year: 2023, genre: 'Dramat',  rating: 5, watched: true  },
+            { id: 2, title: 'Dune: Część druga', year: 2024, genre: 'Sci-Fi',  rating: 4, watched: false },
+            { id: 3, title: 'Past Lives',        year: 2023, genre: 'Romans',  rating: 5, watched: true  },
+            { id: 4, title: 'Poor Things',       year: 2023, genre: 'Komedia', rating: 4, watched: false },
+        ];
+    </script>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script>
+        function RatingStars({ rating }) {
+            const fullStars = '★'.repeat(rating);
+            const emptyStars = '☆'.repeat(5 - rating);
+            const stars = fullStars + emptyStars;
+
+            return React.createElement('span', null, stars);
+        }
+
+        function FilmCard({ title, year, genre, rating, watched }) {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement('h3', null, title + ' (' + year + ')'),
+                React.createElement('span', null, genre),
+                React.createElement(RatingStars, { rating: rating }),
+                watched === true
+                ? React.createElement('p', null, '✓ Obejrzany')
+                : null
+            );
+        }
+
+        function App() {
+            return React.createElement(
+            'div',
+            null,
+            React.createElement('h1', null, '🎬 Biblioteka Filmów'),
+            FILMS.map(function (film) {
+            return React.createElement(FilmCard, {
+                key: film.id,
+                title: film.title,
+                year: film.year,
+                genre: film.genre,
+                rating: film.rating,
+                watched: film.watched
+            });
+        })
+    );
+}
+                const testFilmCard = React.createElement(FilmCard, {
+                    title: 'Test',
+                    year: 2024,
+                    genre: 'Dramat',
+                    rating: 3,
+                    watched: false
+                    });
+
+                    console.log(testFilmCard);
+                    console.log('type:', testFilmCard.type);
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(App)
+);
+</script>
     
 </body>
 </html>
