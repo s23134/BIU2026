@@ -43,9 +43,9 @@
             return React.createElement(
                 'div',
                 null,
-                React.createElement('h3', null, title + '(' + year +')'),
+                React.createElement('h3', null, title + ' (' + year +')'),
                 React.createElement('span', null, genre),
-                React.createElement(RatingStars, {rating: rating}),
+                React.createElement(RatingStars, {rating}),
                 watched === true
                 ? React.createElement('p', null, '✓ Obejrzany')
                 :null
@@ -60,14 +60,14 @@
                 'div',
                 null,
                 React.createElement('h1', null, '🎬 Biblioteka Filmów'),
-                FILMS.map(function (film){
+                FILMS.map(function ({id, title, year, genre, rating, watched}){
                     return React.createElement(FilmCard, {
-                        key: film.id,
-                        title: film.title,
-                        year: film.year,
-                        genre: film.genre,
-                        rating: film.rating,
-                        watched: film.watched
+                        key: id,
+                        title: title,
+                        year: year,
+                        genre: genre,
+                        rating: rating,
+                        watched: watched
                     })
                 })
             )
